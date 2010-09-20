@@ -1,0 +1,62 @@
+#!/usr/bin/env ruby
+
+# == Synopsis
+#
+# Generate a podcast file from a directory of mp3 files. All subdirectories
+# below indicated directory will be searched. 
+#
+# == Usage
+# 
+#   podcast --dir my/mp3/dir --out podcast.rss --title "Title" --description "Description"
+#
+# == Author
+# Ed Summers <ehs@pobox.com>
+#
+# == Copyright
+# Copyright (c) 2004 Ed Summers.
+# Licensed under the same terms as Ruby.
+
+require 'optparse'
+require 'rdoc/usage'
+require 'rubygems'
+require 'podcast'
+
+# the location to look for mp3s
+dir = ''
+
+# the location to write the podcast file
+podcast_file = nil 
+
+# the podcast parameters set by the user
+version = nil
+
+# create podcast object
+podcast = Podcast::Feed.new()
+
+# read options
+opts = OptionParser.new
+opts.on( "-d", "--dir VAL", String )        { |val| dir=val }
+opts.on( "-o", "--out VAL", String )        { |val| podcast_file=val }
+opts.on( "-b", "--base VAL", String )        { |val| podcast.base=val }
+opts.on( "-l", "--link VAL", String )        { |val| podcast.link=val }
+opts.on( "-t", "--title VAL", String )        { |val| podcast.title=val }
+opts.on( "-a", "--about VAL", String )        { |val| podcast.about=val }
+opts.on( "-i", "--image VAL", String )        { |val| podcast.image=val }
+opts.on( "-v", "--version VAL", String )        { |val| version=val }
+opts.on( "-e", "--description VAL", String )        { |val| podcast.description=val }
+opts.parse(ARGV) rescue RDoc::usage( 'usage' )
+RDoc::usage( 'usage' ) if dir == nil || podcast.title == nil || podcast.description == nil
+
+# add a directory
+podcast.add_dir( dir )
+podcast.version = version ? version : "0.9"
+
+# write off the rss
+if podcast_file  
+    file = File.new( podcast_file, 'w' )
+    file.write( podcast.get_rss() )
+    file.close
+else 
+    puts "Outputting podcast"
+    puts podcast.get_rss()
+end
