@@ -1,5 +1,3 @@
-=begin rdoc
-
 Podcast is a simple library and command line utility for creating
 podcast files from a directory of mp3 files. Podcast will 
 examine mp3s, extract metadata from ID3 tags, and build an RSS
@@ -19,8 +17,8 @@ command line utility you can run on a directory of mp3 files:
 
     % podcast --dir=/home/ed/mp3s --out=podcast.rss
 
-Please email the author with suggestions and questions.
+Please note:
+This used to be hosted at http://podcast.rubyforge.org/
+However, that version no longer works with newer versions of Ruby.
 
-    Ed Summers <ehs@pobox.com>
-
-=end
+I have made changes so it to works and after getting no answer from the author or via the list on rubyforge have decided to upload my version here.
