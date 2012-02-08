@@ -53,10 +53,10 @@ podcast.version = version ? version : "0.9"
 
 # write off the rss
 if podcast_file  
-    file = File.new( podcast_file, 'w' )
-    file.write( podcast.get_rss() )
-    file.close
+  file = File.new( podcast_file, 'w' )
+  file.write( podcast.get_rss() )
+  file.close
 else 
-    puts "Outputting podcast"
-    puts podcast.get_rss()
+  puts "Outputting podcast"
+  puts podcast.get_rss()
 end
