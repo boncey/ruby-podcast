@@ -20,26 +20,30 @@ module Podcast
     end
 
     # add an mp3 file to the podcast
-    def add_mp3( file )
-      mp3 = Mp3File.new( file )
-      @mp3s.push( mp3 )
+    def add_mp3(file)
+      begin
+        mp3 = Mp3File.new(file)
+        @mp3s.push(mp3)
+      rescue Mp3InfoError => e
+        puts "Skipping #{file} as it has a problem: #{e}"
+      end
     end
 
     # add a directory location to the podcast
     # the directory will be recursively search
     # for mp3 files.
-    def add_dir( dir )
+    def add_dir(dir)
       # we chdir into the directory so that file paths will be relative
       pwd = Dir.pwd
-      Dir.chdir( dir )
-      Find.find( '.' ) do |f|
-        if ( f =~ /\.mp3$/ && File.size?(f))
-          f.sub!( %r{^./}, '' ) # remove leading './'
+      Dir.chdir(dir)
+      Find.find('.') do |f|
+        if (f =~ /\.mp3$/ && File.size?(f))
+          f.sub!(%r{^./}, '') # remove leading './'
           add_mp3(f)
         end
       end
       # go back to original directory
-      Dir.chdir( pwd )
+      Dir.chdir(pwd)
     end
 
     # the total amount of files in the podcast

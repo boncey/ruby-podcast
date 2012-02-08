@@ -21,4 +21,4 @@ Please note:
 This used to be hosted at http://podcast.rubyforge.org/
 However, that version no longer works with newer versions of Ruby.
 
-I have made changes so it to works and after getting no answer from the author or via the list on rubyforge have decided to upload my version here.
+I have made changes so it to works and after getting no answer from the author or via the list on rubyforge have decided to upload my version to https://github.com/boncey/ruby-podcast

@@ -20,6 +20,14 @@ class PodcastTest < Test::Unit::TestCase
     assert_equal(p.size(), 3)
   end
 
+  def test_add_bad_mp3
+    p = Podcast::Feed.new
+    p.add_mp3('test/test.mp3')
+    p.add_mp3('test/test.mp3')
+    p.add_mp3('test/bad.mp3')
+    assert_equal(p.size(), 2)
+  end
+
   def test_add_dir
     p = Podcast::Feed.new
     p.add_dir('.')

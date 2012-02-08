@@ -11,6 +11,7 @@
 #
 # == Author
 # Ed Summers <ehs@pobox.com>
+# Darren Greaves https://github.com/boncey
 #
 # == Copyright
 # Copyright (c) 2004 Ed Summers.
@@ -35,26 +36,26 @@ podcast = Podcast::Feed.new()
 
 # read options
 opts = OptionParser.new
-opts.on( "-d", "--dir VAL", String )        { |val| dir=val }
-opts.on( "-o", "--out VAL", String )        { |val| podcast_file=val }
-opts.on( "-b", "--base VAL", String )        { |val| podcast.base=val }
-opts.on( "-l", "--link VAL", String )        { |val| podcast.link=val }
-opts.on( "-t", "--title VAL", String )        { |val| podcast.title=val }
-opts.on( "-a", "--about VAL", String )        { |val| podcast.about=val }
-opts.on( "-i", "--image VAL", String )        { |val| podcast.image=val }
-opts.on( "-v", "--version VAL", String )        { |val| version=val }
-opts.on( "-e", "--description VAL", String )        { |val| podcast.description=val }
-opts.parse(ARGV) rescue RDoc::usage( 'usage' )
-RDoc::usage( 'usage' ) if dir == nil || podcast.title == nil || podcast.description == nil
+opts.on("-d", "--dir VAL", String)        { |val| dir=val }
+opts.on("-o", "--out VAL", String)        { |val| podcast_file=val }
+opts.on("-b", "--base VAL", String)        { |val| podcast.base=val }
+opts.on("-l", "--link VAL", String)        { |val| podcast.link=val }
+opts.on("-t", "--title VAL", String)        { |val| podcast.title=val }
+opts.on("-a", "--about VAL", String)        { |val| podcast.about=val }
+opts.on("-i", "--image VAL", String)        { |val| podcast.image=val }
+opts.on("-v", "--version VAL", String)        { |val| version=val }
+opts.on("-e", "--description VAL", String)        { |val| podcast.description=val }
+opts.parse(ARGV) rescue RDoc::usage('usage')
+RDoc::usage('usage') if dir == nil || podcast.title == nil || podcast.description == nil
 
 # add a directory
-podcast.add_dir( dir )
+podcast.add_dir(dir)
 podcast.version = version ? version : "0.9"
 
 # write off the rss
 if podcast_file  
-  file = File.new( podcast_file, 'w' )
-  file.write( podcast.get_rss() )
+  file = File.new(podcast_file, 'w')
+  file.write(podcast.get_rss())
   file.close
 else 
   puts "Outputting podcast"
