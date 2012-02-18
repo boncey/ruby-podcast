@@ -1,3 +1,5 @@
+require 'rubygems'
+require 'podcast/version'
 require 'find'
 require 'rss/0.9'
 require 'mp3info'
