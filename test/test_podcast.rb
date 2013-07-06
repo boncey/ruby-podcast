@@ -52,6 +52,7 @@ class PodcastTest < Test::Unit::TestCase
     items = rss.items()
     assert(items.size == 1)
     assert_equal(items[0].link, 'http://www.example.org/torrents/test.mp3')
+    assert_equal(rss.channel.title, p.title)
   end
 
 end

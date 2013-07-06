@@ -18,6 +18,7 @@ module Podcast
     def initialize
       @mp3s = []
       @language = "English"
+      @about = "Made with #{NAME}"
       @base = ''
     end
 
@@ -29,6 +30,10 @@ module Podcast
       rescue Mp3InfoError => e
         puts "Skipping #{file} as it has a problem: #{e}"
       end
+    end
+
+    def valid?
+      title != nil && description != nil && link != nil
     end
 
     # add a directory location to the podcast
@@ -58,13 +63,15 @@ module Podcast
       #version = "1.0" # ["0.9", "1.0", "2.0"]
       version = @version
 
-      content = RSS::Maker.make(version) do |m|
+      content = RSS::Maker.make(@version) do |m|
         m.channel.title = @title
         m.channel.description = @description 
         m.channel.link = @link 
         m.channel.language = @language
         m.channel.about = @about
         m.items.do_sort = true # sort items by date
+        m.channel.updated = Time.now.to_s
+        m.channel.author = NAME
 
         if @image != nil
           m.image.url = @image

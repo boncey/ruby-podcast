@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby -d
+#!/usr/bin/env ruby
 
 # == Synopsis
 #
@@ -7,7 +7,7 @@
 #
 # == Usage
 # 
-#   podcast --dir my/mp3/dir --out podcast.rss --title "Title" --description "Description"
+#   podcast --dir my/mp3/dir --out podcast.rss --title "Title" --description "Description" --link http://mypodcastserver/
 #
 # == Author
 # Ed Summers <ehs@pobox.com>
@@ -18,9 +18,15 @@
 # Licensed under the same terms as Ruby.
 
 require 'optparse'
-require 'rdoc/usage'
 require 'rubygems'
 require 'podcast'
+
+def usage(opts)
+  puts 'podcast --dir my/mp3/dir --out podcast.rss --title "Title" --description "Description" --link http://mypodcastserver/'
+  puts "Version: #{Podcast::NAME}"
+  puts opts.help
+  exit
+end
 
 # the location to look for mp3s
 dir = ''
@@ -45,8 +51,16 @@ opts.on("-a", "--about VAL", String)        { |val| podcast.about=val }
 opts.on("-i", "--image VAL", String)        { |val| podcast.image=val }
 opts.on("-v", "--version VAL", String)        { |val| version=val }
 opts.on("-e", "--description VAL", String)        { |val| podcast.description=val }
-opts.parse(ARGV) rescue RDoc::usage('usage')
-RDoc::usage('usage') if dir == nil || podcast.title == nil || podcast.description == nil
+begin
+  opts.parse(ARGV)
+rescue => e
+  usage(opts)
+end
+
+if dir == nil || !File.directory?(dir) || !podcast.valid?
+  usage(opts)
+end
+
 
 # add a directory
 podcast.add_dir(dir)

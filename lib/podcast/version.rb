@@ -1,3 +1,4 @@
 module Podcast
-  VERSION = "0.0.5"
+  VERSION = "0.0.6"
+  NAME = "ruby-podcast-#{VERSION}"
 end
