@@ -12,9 +12,8 @@ Or you can grab ruby-mp3info here:
 
     http://rubyforge.org/projects/ruby-mp3info/
 
-Then get the ruby-podcast source:
+Then [download](https://github.com/boncey/ruby-podcast/archive/master.zip) and unzip ruby-podcast:
 
-    git clone https://github.com/boncey/ruby-podcast.git - or [download](https://github.com/boncey/ruby-podcast/archive/master.zip)
     cd ruby-podcast
     gem build podcast.gemspec
     gem install podcast-*.gem (this may need a sudo prefix depending on your ruby setup)
