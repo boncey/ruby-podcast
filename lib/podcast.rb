@@ -17,7 +17,7 @@ module Podcast
 
     def initialize
       @mp3s = []
-      @language = "English"
+      @language = "en-us"
       @about = "Made with #{NAME}"
       @base = ''
     end
