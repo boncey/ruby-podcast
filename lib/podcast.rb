@@ -79,7 +79,6 @@ module Podcast
         end
 
         for mp3 in @mp3s 
-          next if ! mp3.artist
           item = m.items.new_item
           item.title = mp3
           ## add a base url 
