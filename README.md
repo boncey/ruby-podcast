@@ -1,26 +1,13 @@
 ## Podcast is a simple library and command line utility for creating podcast files from a directory of mp3 files.
-Podcast will examine mp3s, extract metadata from ID3 tags, and build an RSS file which can then be podcast clients to download the mp3s.
+Podcast will examine mp3s, extract metadata from ID3 tags, and build an RSS file which can then be used by podcast clients to download the mp3s.
 
-### To build and install ruby-podcast
+### To install ruby-podcast
 
-You'll need to install the Ruby mp3info library installed before podcast
-will work:
-
-    gem install ruby-mp3info
-
-Or you can grab ruby-mp3info here:
-
-    http://rubyforge.org/projects/ruby-mp3info/
-
-Then [download](https://github.com/boncey/ruby-podcast/archive/master.zip) and unzip ruby-podcast:
-
-    cd ruby-podcast
-    gem build podcast.gemspec
-    gem install podcast-*.gem (this may need a sudo prefix depending on your ruby setup)
+    gem install ruby-podcast
 
 ### Usage
 
-Once you've installed ruby-mp3info and podcast you should have a 
+Once you've installed it you should have a 
 command line utility you can run on a directory of mp3 files:
 
     % podcast --dir my/mp3/dir --out podcast.rss --title "Title" --description "Description" --link http://mypodcastserver/
@@ -29,4 +16,4 @@ command line utility you can run on a directory of mp3 files:
 This used to be hosted at http://podcast.rubyforge.org/
 However, that version no longer works with newer versions of Ruby.
 
-I (https://github.com/boncey) have made changes so it to works and after getting no answer from the author or via the list on rubyforge have decided to upload my version to https://github.com/boncey/ruby-podcast
+I, [boncey](https://github.com/boncey), have fixed it and created a new project at https://rubygems.org/gems/ruby-podcast
