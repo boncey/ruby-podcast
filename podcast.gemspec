@@ -18,4 +18,5 @@ Gem::Specification.new do |s|
   s.executables     = %w{podcast}
   s.require_paths   = ["lib"]
   s.add_dependency  "ruby-mp3info"
+  s.add_dependency  "mp4info"
 end

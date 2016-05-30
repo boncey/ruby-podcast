@@ -3,6 +3,7 @@ require 'podcast/version'
 require 'find'
 require 'rss/0.9'
 require 'mp3info'
+require 'mp4info'
 require 'rss/maker'
 require 'uri'
 
@@ -27,7 +28,7 @@ module Podcast
       begin
         podcast_file = PodcastFile.new(file)
         @podcast_files.push(podcast_file)
-      rescue Mp3InfoError => e
+      rescue Exception => e
         puts "Skipping #{file} as it has a problem: #{e}"
       end
     end
@@ -111,18 +112,31 @@ module Podcast
     attr_reader :artist, :album, :title, :file, :path, :length, :type, :mtime
     attr_writer :artist, :album, :title, :file, :path, :length, :type, :mtime
 
-    def initialize(f)
-      file = File.new(f)
-      info = Mp3Info.open(f)
-      tag = info.tag()
-      @file = f
-      @artist = tag['artist']
-      @album = tag['album']
-      @title = tag['title']
+    def initialize(file_path)
+
+      # Universal values, regardless of media type
+      file = File.new(file_path)
       @path = file.path()
       @length = file.stat.size()
       @mtime = file.stat.mtime()
-      @type = 'audio/mpeg'
+
+      # Media-specific values.
+      if file_path =~ /mp3$/ then
+        info = Mp3Info.open(file_path)
+        tag = info.tag()
+        @type = 'audio/mpeg'
+        @artist = tag['artist']
+        @album = tag['album']
+        @title = tag['title']
+      elsif file =~ /mp4/ then
+        info = MP4Info.open(file)
+        @type = 'video/mp4'
+        @artist = info['ART']
+        @album = info['ALB']
+        @title = info['NAM']
+      else
+        raise 'Unknown file type. Skipping!'
+      end
     end
 
     def to_s
