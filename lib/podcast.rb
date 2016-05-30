@@ -128,12 +128,12 @@ module Podcast
         @artist = tag['artist']
         @album = tag['album']
         @title = tag['title']
-      elsif file =~ /mp4/ then
+      elsif file_path =~ /mp4$/ then
         info = MP4Info.open(file)
         @type = 'video/mp4'
-        @artist = info['ART']
-        @album = info['ALB']
-        @title = info['NAM']
+        @artist = "ALB" # info[:ART]
+        @album = "ALB" # info[:ALB]
+        @title = info[:NAM] || file_path
       else
         raise 'Unknown file type. Skipping!'
       end
