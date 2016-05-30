@@ -10,5 +10,5 @@ task :default => :test
 
 desc "Run single test with local Gem"
 task :test1 do
-	puts `bundle exec ./bin/podcast --dir test/ --title t --description desc --link link --image bleh`
+    puts `bundle exec ./bin/podcast --dir test/ --title t --description desc --link link --image bleh`
 end
