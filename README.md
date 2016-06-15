@@ -36,7 +36,12 @@ thus be accessible to e.g.: iTunes. Then take this URL:
 	http://localhost:8080/test.rss
 
 And go to: `iTunes` -> `File` -> `Subscribe to Podcast...` and paste the URL
-there.
+there. You should see a video file.
+
+Since it looks like iTunes doesn't like mixed video/audio podcasts, to test
+purely audio-podcast, just:
+
+	rm test/small.mp4
 
 ### Usage
 
