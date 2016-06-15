@@ -131,9 +131,9 @@ module Podcast
       elsif file_path =~ /mp4$/ then
         info = MP4Info.open(file)
         @type = 'video/mp4'
-        @artist = "ALB" # info[:ART]
-        @album = "ALB" # info[:ALB]
-        @title = info[:NAM] || file_path
+        @artist = info.ART() ? info.ART() : "ARTIST"
+        @album = info.ALB() ? info.ALB() : "ALBUM"
+        @title = info.NAM()  ? info.NAM() : "TITLE"
       else
         raise 'Unknown file type. Skipping!'
       end
