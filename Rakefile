@@ -27,7 +27,7 @@ task :test2 do
 	cmd += "	--title #{name}"
 	cmd += "	--description #{name}"
 	cmd += "	--link http://#{address}/"
-	cmd += "	--base http://#{address}/"
+	cmd += "	--base http://#{address}/#{test_dir}"
 	cmd += "	--version 2.0"
 	cmd += "	--out #{out_filename}"
 	cmd += "	--image #{image_desc}"
