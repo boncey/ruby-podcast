@@ -13,12 +13,7 @@ podcast clients to download the mp3s.
 
     gem install ruby-podcast
 
-### Usage
-
-Once you've installed it you should have a 
-command line utility you can run on a directory of your media files:
-
-    % podcast --dir test/ --out podcast.rss --title "Title" --description % "Description" --link http://mypodcastserver/ --image bleh
+### Quickstart
 
 To quickstart, we've provided 2 Rake tasks for quick bootstrapping:
 
@@ -29,7 +24,26 @@ and:
 	% rake test2
 
 First should print the RSS feed content on the standard output. The 2nd will
-create an RSS file in the current directory.
+create an RSS `test.rss` file in the current directory.
+
+To test the accessibility of your resources, run:
+
+	% python -m SimpleHTTPServer 8080
+
+This runs an HTTP server built into Python. Your generated `test.rss` will
+thus be accessible to e.g.: iTunes. Then take this URL:
+
+	http://localhost:8080/test.rss
+
+And go to: `iTunes` -> `File` -> `Subscribe to Podcast...` and paste the URL
+there.
+
+### Usage
+
+Once you've installed it you should have a
+command line utility you can run on a directory of your media files:
+
+    % podcast --dir test/ --out podcast.rss --title "Title" --description % "Description" --link http://mypodcastserver/ --image bleh
 
 ### Contributing
 
